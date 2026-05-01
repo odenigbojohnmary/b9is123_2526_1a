@@ -8,12 +8,53 @@
             //and a button to remove some
             //the remove function should update the weight
             //and let the user know when ok to proceed
-            let check=()=>{
-              alert('Checking Baggage weight: '+parseInt(document.getElementById('weight').value));
-              //These should only display if it is actually overweight
-              document.getElementById('removed').style='display:block;'
-              document.getElementById('remB').style='display:block;'
-            }
-            let remove=()=>alert('Removing weight: '+parseInt(document.getElementById('removed').value))
+            let check = () => {
+              let weightInput = document.getElementById('weight');
+              let weight = parseInt(weightInput.value);
+              
+              if (isNaN(weight)) {
+                alert('Please enter a valid weight.');
+                return;
+              }
+              
+              alert('Checking Baggage weight: ' + weight + 'kg');
+              
+              if (weight > 15) {
+                alert('Baggage is overweight! Maximum allowed is 15kg.');
+                document.getElementById('removed').style.display = 'inline-block';
+                document.getElementById('remB').style.display = 'inline-block';
+              } else {
+                alert('Baggage weight is OK. You may proceed.');
+                document.getElementById('removed').style.display = 'none';
+                document.getElementById('remB').style.display = 'none';
+              }
+            };
 
-            //Test edit no. 2;
+            let remove = () => {
+              let weightInput = document.getElementById('weight');
+              let removedInput = document.getElementById('removed');
+              
+              let currentWeight = parseInt(weightInput.value);
+              let amountToRemove = parseInt(removedInput.value);
+              
+              if (isNaN(amountToRemove) || amountToRemove <= 0) {
+                alert('Please enter a valid amount to remove.');
+                return;
+              }
+              
+              let newWeight = currentWeight - amountToRemove;
+              if (newWeight < 0) newWeight = 0;
+              
+              weightInput.value = newWeight;
+              removedInput.value = '';
+              
+              alert('Removed ' + amountToRemove + 'kg. New weight is: ' + newWeight + 'kg');
+              
+              if (newWeight <= 15) {
+                alert('Baggage weight is now OK. You may proceed.');
+                document.getElementById('removed').style.display = 'none';
+                document.getElementById('remB').style.display = 'none';
+              } else {
+                alert('Baggage is still overweight. Please remove more.');
+              }
+            };
