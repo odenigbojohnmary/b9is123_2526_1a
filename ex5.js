@@ -1,58 +1,27 @@
 let parse=(i)=>{
-  let o=parseInt(i);
+      o=parseInt(i)
   if (isNaN(o))
     throw("NaN");
   return o;
 }
 
 //Create a modified version of ex4 that prepends "corrupt" where an error occurs
-let processStringStrict = (inputStr) => {
-  try {
-    let parts = inputStr.split(':');
-    if (parts.length !== 2) throw new Error("Missing colon");
-    
-    let factorsStr = parts[0].trim();
-    let multiplesStr = parts[1].trim();
-    
-    let factors = factorsStr.split(/\s+/).map(parse);
-    let multiples = multiplesStr.split(/\s+/).map(parse);
-    
-    // Assume listEuler3 is available from ex3.js
-    let sum = listEuler3(factors, multiples);
-    
-    return sum + " : " + inputStr;
-  } catch (e) {
-    return "corrupt : " + inputStr;
-  }
-};
+
+//Examples ()
+// 2 3 5 67
+// corrupt : 2 3 5 67
+
+//Actually this one will not result in an error unless you throw one as in parse(i) above:
+// 3 5 hello: 1 2 3 4 5 6 7 8 9
+// corrupt : 3 5 hello: 1 2 3 4 5 6 7 8 9
 
 //Create a further version that will output the answer omitting corrupted values
 //or "corrupt" if it cannot be resolved
-let processStringLenient = (inputStr) => {
-  try {
-    let parts = inputStr.split(':');
-    if (parts.length !== 2) throw new Error("Missing colon");
-    
-    let factorsStr = parts[0].trim();
-    let multiplesStr = parts[1].trim();
-    
-    let factors = factorsStr.split(/\s+/).map(x => {
-      try { return parse(x); } catch(e) { return null; }
-    }).filter(x => x !== null);
-    
-    let multiples = multiplesStr.split(/\s+/).map(x => {
-      try { return parse(x); } catch(e) { return null; }
-    }).filter(x => x !== null);
-    
-    // If we want to return corrupt when no valid numbers are left
-    // We can throw here. However, the example shows ignoring 'hello' 
-    // and processing valid ones.
-    
-    // Assume listEuler3 is available from ex3.js
-    let sum = listEuler3(factors, multiples);
-    
-    return sum + " : " + inputStr;
-  } catch (e) {
-    return "corrupt : " + inputStr;
-  }
-};
+
+// 3 5 hello: 1 2 3 4 5 6 7 8 9
+// 23 : 3 5 hello: 1 2 3 4 5 6 7 8 9
+
+//this cannot be fixed - actually this is the only one that will throw errors
+// 2 3 5 67
+// corrupt : 2 3 5 67
+
