@@ -41,6 +41,3 @@ async function fetchMostForkedRepo(username) {
     return `Error: ${error.message}`;
   }
 }
-
-// Example usage:
-// getMostForkedRepo('octocat').then(console.log);
