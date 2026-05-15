@@ -41,3 +41,17 @@ async function fetchMostForkedRepo(username) {
     return `Error: ${error.message}`;
   }
 }
+
+// // UI handler — called from the page button
+// let runEx6 = async () => {
+//   let username = document.getElementById("ex6input").value.trim();
+//   let output   = document.getElementById("ex6output");
+
+//   if (!username) {
+//     output.textContent = "Please enter a GitHub username.";
+//     return;
+//   }
+
+//   output.textContent = "Fetching…";
+//   output.textContent = await fetchMostForkedRepo(username);
+// };
